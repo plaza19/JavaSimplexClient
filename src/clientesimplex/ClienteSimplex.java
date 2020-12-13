@@ -1,9 +1,47 @@
 package clientesimplex;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 public class ClienteSimplex {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		String direccion = "localhost";
+		int puerto = 9090;
+		Scanner scan;
+		PrintWriter pr;
+		
+		try {
+			Socket socket = new Socket(direccion, puerto); //conectamos el socket a la direccion y el puerto
+			
+			scan = new Scanner(System.in);
+			pr = new PrintWriter(socket.getOutputStream());
+			
+			while(scan.hasNextLine()) {
+				
+				String linea = scan.nextLine();
+				pr.println(linea);
+				pr.flush();
+			}
+			
+			
+			
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, "NO SE HA PODIDO CONECTAR CON EL SERVIDOR\n"
+					+ "- Comprueba que el servidor está levantado\n"
+					+ "- Comprueba la dirección y el puerto\n"
+					+ "- Si tratas de conectarte a una ip pública, comprueba que el puerto está abierto\n"
+					+ "- Ejecuta la aplicación en modo consola para ver más detalles");
+		}
 
 	}
 
