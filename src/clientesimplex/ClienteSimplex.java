@@ -12,11 +12,12 @@ import javax.swing.JOptionPane;
 import gui.Gui;
 
 public class ClienteSimplex {
+	
+	public static String direccion = "localhost";
+	public static int puerto = 9090;
 
 	public static void main(String[] args) {
-		
-		String direccion = "localhost";
-		int puerto = 9090;
+
 		Scanner scan;
 		PrintWriter pr;
 		
@@ -52,6 +53,10 @@ public class ClienteSimplex {
 					+ "- Ejecuta la aplicación en modo consola para ver más detalles");
 		}
 
+	}
+	
+	public static void actualizaPuerto(int puerto) {
+		ClienteSimplex.puerto = puerto;
 	}
 
 }

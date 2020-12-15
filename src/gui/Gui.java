@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.plaf.OptionPaneUI;
+
+import clientesimplex.ClienteSimplex;
 
 
 public class Gui extends JFrame {
@@ -46,7 +50,8 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				JOptionPane optionpane = new JOptionPane();
-				optionpane.showInputDialog(null, "Introduce la nueva dirección por favor");
+				String resultado = optionpane.showInputDialog(null, "Introduce la nueva dirección por favor");
+				
 				
 			}
 		});
@@ -56,12 +61,18 @@ public class Gui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane optionpane = new JOptionPane();
-				optionpane.showInputDialog(null, "Introduce el nuevo puerto por favor");
-				
-				if (optionpane.OK_CANCEL_OPTION == 1 ) {
-					System.out.println("se ha acepatado");
+				try {
+					JOptionPane optionpane = new JOptionPane();
+					String nuevo_puerto = optionpane.showInputDialog(null, "Introduce el nuevo puerto por favor");
+					ClienteSimplex.actualizaPuerto(Integer.parseInt(nuevo_puerto));
+					System.out.println("El nuevo puerto es: " + ClienteSimplex.puerto);
+				}catch(Exception ex) {
+					JOptionPane error = new JOptionPane();
+					error.showMessageDialog(null, "-El puerto es un número", "ERROR", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
 				}
+				
+				
+				
 				
 			}
 		});
